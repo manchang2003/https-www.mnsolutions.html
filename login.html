@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="logstylesheet.css">
+</head>
+<body>
+
+    <h2>Welcome to Mn Computer Academy Login</h2>
+
+    <form id="loginForm" action="/login" method="POST">
+        <div class="container">
+            <label for="username"><b>Username</b></label>
+            <input type="text" placeholder="Enter Username" name="username" id="username" required>
+
+            <label for="password"><b>Password</b></label>
+            <input type="password" placeholder="Enter Password" name="password" id="password" required>
+
+            <a href="liveclass.html"><button type="button">Login</button></a> 
+        </div>
+
+        <div class="container">
+            <a href="frame.html">  <button type="button" class="cancelbtn">Cancel</button></a>
+        </div>
+    </form>
+
+    <script src="login.js"></script>
+
+</body>
+</html>

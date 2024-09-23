@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Student Account - Mn Computer Academy</title>
+    <link rel="stylesheet" href="signupsheet.css">
+</head>
+<body>
+
+    <h2>Create Student Account</h2>
+
+    <form id="studentAccountForm" action="/create-account" method="POST">
+        <div class="container">
+            <label for="username"><b>Username</b></label>
+            <input type="text" placeholder="Enter Username" name="username" id="username" required>
+
+            <label for="email"><b>Email</b></label>
+            <input type="email" placeholder="Enter Email" name="email" id="email" required>
+
+            <label for="phone"><b>Phone Number</b></label>
+            <input type="tel" placeholder="Enter Phone Number" name="phone" id="phone" required>
+
+            <label for="dob"><b>Date of Birth</b></label>
+            <input type="date" name="dob" id="dob" required>
+
+            <label for="state"><b>State of Origin</b></label>
+            <input type="text" placeholder="Enter State of Origin" name="state" id="state" required>
+
+            <label for="country"><b>Country</b></label>
+            <input type="text" placeholder="Enter Country" name="country" id="country" required>
+
+            <label for="olResults"><b>O-Level Results</b></label>
+            <textarea placeholder="Enter O-Level Results" name="olResults" id="olResults" required></textarea>
+
+            <label for="password"><b>Password</b></label>
+            <input type="password" placeholder="Enter Password" name="password" id="password" required>
+
+            <label for="confirmPassword"><b>Confirm Password</b></label>
+            <input type="password" placeholder="Confirm Password" name="confirmPassword" id="confirmPassword" required>
+
+            <button type="submit">Create Account</button>
+        </div>
+
+        <div class="container">
+          <a href="frame.html"> <button type="button" class="cancelbtn">Cancel</button></a>
+        </div>
+    </form>
+
+    <script src="signup.js"></script>
+
+</body>
+</html>
