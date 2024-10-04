@@ -3,44 +3,191 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Courses - Online School</title>
-    <link rel="stylesheet" href="css/style.css">
+    <title>MN Computer Academy - Available Courses</title>
+    <style>
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+
+        header {
+            background-color: #003366;
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+        }
+
+        /* Navigation Bar */
+        nav {
+            background-color: #0055b3;
+            padding: 10px;
+            text-align: center;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 18px;
+        }
+
+        nav a:hover {
+            color: #ffcc00;
+        }
+
+        /* Course Section */
+        .courses-container {
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 0 20px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: space-around;
+        }
+
+        .course {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            width: 350px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .course h3 {
+            color: #003366;
+            margin-bottom: 15px;
+            font-size: 24px;
+        }
+
+        .course p {
+            font-size: 18px;
+            line-height: 1.6;
+            color: #666;
+        }
+
+        .course .price {
+            font-size: 22px;
+            color: #003366;
+            margin: 15px 0;
+            font-weight: bold;
+        }
+
+        .course button {
+            padding: 10px 20px;
+            background-color: #003366;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .course button:hover {
+            background-color: #0055b3;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #003366;
+            color: white;
+            margin-top: 50px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .courses-container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .course {
+                width: 90%;
+                margin-bottom: 30px;
+            }
+        }
+    </style>
 </head>
 <body>
 
-    <!-- Navigation -->
-    <header>
-        <div class="logo">
-            <h1>Online School</h1>
-        </div>
-        <nav>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="about.html">About Us</a></li>
-                <li><a href="courses.html">Courses</a></li>
-                <li><a href="contact.html">Contact</a></li>
-                <li><a href="#login">Login</a></li>
-            </ul>
-        </nav>
-    </header>
+<!-- Header -->
+<header>
+    <h1>MN Computer Academy</h1>
+    <p>Your Gateway to the Best Online Tech Courses</p>
+</header>
 
-    <!-- Courses Section -->
-    <section class="courses">
-        <h2>Our Courses</h2>
-        <ul>
-            <li><strong>Web Development</strong>: Learn to build dynamic websites from scratch.</li>
-            <li><strong>Data Science</strong>: Dive deep into data analysis, machine learning, and AI.</li>
-            <li><strong>Graphic Design</strong>: Develop your creative skills with hands-on projects.</li>
-            <!-- Add more courses here -->
-        </ul>
-    </section>
+<!-- Navigation -->
+<nav>
+    <a href="index.html">Home</a>
+    <a href="#courses">Courses</a>
+    <a href="registration.html">Registration</a>
+    <a href="payment.html">Payment</a>
+    <a href="signup.html">Sign Up</a>
+    <a href="login.html">Login</a>
+    <a href="contact.html">Contact Us</a>
+</nav>
 
-    <!-- Footer -->
-    <footer>
-        <div class="footer-content">
-            <p>&copy; 2024 Online School. All rights reserved.</p>
-        </div>
-    </footer>
+<!-- Available Courses Section -->
+<section class="courses-container" id="courses">
+    <!-- Web Development Course -->
+    <div class="course">
+        <h3>Web Development</h3>
+        <p>Learn HTML, CSS, JavaScript, and build responsive websites. Start a career as a front-end or back-end developer.</p>
+        <p class="price">$500</p>
+        <button>Enroll Now</button>
+    </div>
+
+    <!-- Data Science Course -->
+    <div class="course">
+        <h3>Data Science</h3>
+        <p>Master Python, data visualization, machine learning, and data analytics. Build predictive models for businesses.</p>
+        <p class="price">$600</p>
+        <button>Enroll Now</button>
+    </div>
+
+    <!-- Networking Course -->
+    <div class="course">
+        <h3>Networking</h3>
+        <p>Gain expertise in computer networks, protocols, and security systems. Prepare for a career as a network engineer.</p>
+        <p class="price">$450</p>
+        <button>Enroll Now</button>
+    </div>
+
+    <!-- Cyber Security Course -->
+    <div class="course">
+        <h3>Cyber Security</h3>
+        <p>Learn to protect systems, networks, and data from cyber threats. Ideal for aspiring security specialists.</p>
+        <p class="price">$700</p>
+        <button>Enroll Now</button>
+    </div>
+   <!-- Cyber Security Course -->
+    <div class="course">
+        <h3>Cyber Security</h3>
+        <p>Learn to protect systems, networks, and data from cyber threats. Ideal for aspiring security specialists.</p>
+        <p class="price">$700</p>
+        <button>Enroll Now</button>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer>
+    <p>&copy; 2024 MN Computer Academy. All rights reserved.</p>
+</footer>
 
 </body>
 </html>
