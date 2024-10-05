@@ -93,24 +93,5 @@
             <input type="submit" value="Register">
         </form>
     </div>
-const express = require('express');
-const bodyParser = require('body-parser');
-const app = express();
-const port = process.env.PORT || 3000;
-
-app.use(bodyParser.urlencoded({ extended: true }));
-
-// Sample registration route
-app.post('/register', (req, res) => {
-    const { name, email, phone, password } = req.body;
-    // Here you would add logic to save this data to a database
-    console.log(`User registered: ${name}, ${email}, ${phone}`);
-    res.send('Registration successful');
-});
-
-app.listen(port, () => {
-    console.log(`Server running on port ${port}`);
-});
-
 </body>
 </html>
