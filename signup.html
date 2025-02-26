@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create Student Account - Mn Computer Academy</title>
-    <link rel="stylesheet" href="signupsheet.css">
+    <title>Create Student Account - Unique Computer Academy</title>
+    
 </head>
 <body>
 
@@ -13,41 +13,149 @@
     <form id="studentAccountForm" action="/create-account" method="POST">
         <div class="container">
             <label for="username"><b>Username</b></label>
-            <input type="text" placeholder="Enter Username" name="username" id="username" required>
+            <input type="text" placeholder="Enter Username" name="username" id="username" required aria-required="true">
 
             <label for="email"><b>Email</b></label>
-            <input type="email" placeholder="Enter Email" name="email" id="email" required>
+            <input type="email" placeholder="Enter Email" name="email" id="email" required aria-required="true" oninput="validateEmail()">
+            <span id="emailError" class="error-message"></span>
 
             <label for="phone"><b>Phone Number</b></label>
-            <input type="tel" placeholder="Enter Phone Number" name="phone" id="phone" required>
+            <input type="tel" placeholder="Enter Phone Number" name="phone" id="phone" required aria-required="true">
 
             <label for="dob"><b>Date of Birth</b></label>
-            <input type="date" name="dob" id="dob" required>
+            <input type="date" name="dob" id="dob" required aria-required="true">
 
             <label for="state"><b>State of Origin</b></label>
-            <input type="text" placeholder="Enter State of Origin" name="state" id="state" required>
+            <input type="text" placeholder="Enter State of Origin" name="state" id="state" required aria-required="true">
 
             <label for="country"><b>Country</b></label>
-            <input type="text" placeholder="Enter Country" name="country" id="country" required>
+            <input type="text" placeholder="Enter Country" name="country" id="country" required aria-required="true">
 
             <label for="olResults"><b>O-Level Results</b></label>
-            <textarea placeholder="Enter O-Level Results" name="olResults" id="olResults" required></textarea>
+            <textarea placeholder="Enter O-Level Results" name="olResults" id="olResults" required aria-required="true"></textarea>
 
             <label for="password"><b>Password</b></label>
-            <input type="password" placeholder="Enter Password" name="password" id="password" required>
+            <input type="password" placeholder="Enter Password" name="password" id="password" required aria-required="true" oninput="checkPasswordStrength()">
+            <div id="passwordStrength" class="password-strength"></div>
 
             <label for="confirmPassword"><b>Confirm Password</b></label>
-            <input type="password" placeholder="Confirm Password" name="confirmPassword" id="confirmPassword" required>
+            <input type="password" placeholder="Confirm Password" name="confirmPassword" id="confirmPassword" required aria-required="true">
 
             <button type="submit">Create Account</button>
         </div>
 
         <div class="container">
-          <a href="frame.html"> <button type="button" class="cancelbtn">Cancel</button></a>
+            <a href="frame.html"><button type="button" class="cancelbtn">Cancel</button></a>
         </div>
     </form>
+<style> 
+/* Global Styles */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f8f9fa;
+    margin: 0;
+    padding: 0;
+}
 
-    <script src="signup.js"></script>
+/* Header Styles */
+h2 {
+    text-align: center;
+    color: #003366;
+}
+
+/* Container Styles */
+.container {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Form Elements */
+label {
+    display: block;
+    margin: 10px 0 5px;
+}
+
+input, select, textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    transition: border-color 0.3s ease;
+}
+
+input:focus, select:focus, textarea:focus {
+    border-color: #003366;
+    outline: none;
+}
+
+/* Button Styles */
+button {
+    background-color: #003366;
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    width: 100%;
+}
+
+button:hover {
+    background-color: #0055b3;
+}
+
+/* Error Message Styles */
+.error-message {
+    color: red;
+    font-size: 0.9em;
+}
+
+/* Password Strength Indicator */
+.password-strength {
+    font-size: 0.9em;
+    color: green;
+}
+
+/* Responsive Styles */
+@media (max-width: 600px) {
+    .container {
+        padding: 15px;
+    }
+}
+</style>
+    <script>
+        function validateEmail() {
+    const email = document.getElementById('email').value;
+    const emailError = document.getElementById('emailError');
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!emailPattern.test(email)) {
+        emailError.textContent = 'Please enter a valid email address.';
+    } else {
+        emailError.textContent = '';
+    }
+}
+
+function checkPasswordStrength() {
+    const password = document.getElementById('password').value;
+    const passwordStrength = document.getElementById('passwordStrength');
+
+    if (password.length < 6) {
+        passwordStrength.textContent = 'Weak: Password must be at least 6 characters.';
+        passwordStrength.style.color = 'red';
+    } else if (password.length < 10) {
+        passwordStrength.textContent = 'Moderate: Consider adding numbers and symbols.';
+        passwordStrength.style.color = 'orange';
+    } else {
+        passwordStrength.textContent = 'Strong: Good password!';
+        passwordStrength.style.color = 'green';
+    }
+}
+    </script>
 
 </body>
 </html>
