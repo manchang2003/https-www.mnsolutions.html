@@ -3,30 +3,171 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Page</title>
-    <link rel="stylesheet" href="logstylesheet.css">
+    <title>Login - Powerful Login Page</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-    <h2 style="text-align:center">Welcome to Mn Computer Academy Login</h2>
-
-    <form id="loginForm" action="/login" method="POST">
-        <div class="container">
-            <label for="username"><b>Username</b></label>
-            <input type="text" placeholder="Enter Username" name="username" id="username" required>
+    <div class="login-container">
+        <h2>Login to Your Account</h2>
+        <form id="loginForm">
+            <label for="email"><b>Email</b></label>
+            <input type="email" placeholder="Enter your email" name="email" id="email" required>
+            <span id="emailError" class="error-message"></span>
 
             <label for="password"><b>Password</b></label>
-            <input type="password" placeholder="Enter Password" name="password" id="password" required>
+            <input type="password" placeholder="Enter your password" name="password" id="password" required>
+            <span id="passwordError" class="error-message"></span>
+            <input type="checkbox" id="showPassword"> Show Password
 
-            <a href="liveclass.html"><button type="button">Login</button></a> 
-        </div>
+            <div class="remember-me">
+                <input type="checkbox" id="rememberMe"> Remember Me
+            </div>
 
-        <div class="container">
-            <a href="frame.html">  <button type="button" class="cancelbtn">Cancel</button></a>
-        </div>
-    </form>
+            <button type="submit" id="loginButton">Login</button>
+            <p><a href="#">Forgot Password?</a></p>
+            <p>Don't have an account? <a href="signup.html">Sign up</a></p>
+        </form>
+    </div>
 
-    <script src="login.js"></script>
+    <div id="loadingSpinner" class="loading-spinner" style="display:none;">
+        <div class="spinner"></div>
+    </div>
+<style>
+    /* Global Styles */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
 
+/* Login Container Styles */
+.login-container {
+    max-width: 400px;
+    margin: 100px auto;
+    padding: 20px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Header Styles */
+h2 {
+    text-align: center;
+    color: #003366;
+}
+
+/* Form Elements */
+label {
+    display: block;
+    margin: 10px 0 5px;
+}
+
+input[type="email"],
+input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    transition: border-color 0.3s ease;
+}
+
+input:focus {
+    border-color: #003366;
+    outline: none;
+}
+
+/* Button Styles */
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #003366;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0055b3;
+}
+
+/* Error Message Styles */
+.error-message {
+    color: red;
+    font-size: 0.9em;
+}
+
+/* Remember Me Styles */
+.remember-me {
+    margin: 10px 0;
+}
+
+/* Loading Spinner Styles */
+.loading-spinner {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.spinner {
+    border: 8px solid #f3f3f3; /* Light grey */
+    border-top: 8px solid #3498db; /* Blue */
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Responsive Styles */
+@media (max-width: 600px) {
+    .login-container {
+        padding: 15px;
+    }
+}
+</style>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+    const loginForm = document.getElementById('loginForm');
+    const emailInput = document.getElementById('email');
+    const passwordInput = document.getElementById('password');
+    const emailError = document.getElementById('emailError');
+    const passwordError = document.getElementById('passwordError');
+    const showPasswordCheckbox = document.getElementById('showPassword');
+    const loginButton = document.getElementById('loginButton');
+    const loadingSpinner = document.getElementById('loadingSpinner');
+
+    // Show/Hide Password
+    showPasswordCheckbox.addEventListener('change', () => {
+        passwordInput.type = showPasswordCheckbox.checked ? 'text' : 'password';
+    });
+
+    // Real-time Email Validation
+    emailInput.addEventListener('input', () => {
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailPattern.test(emailInput.value)) {
+            emailError.textContent = 'Please enter a valid email address.';
+        } else {
+            emailError.textContent = '';
+        }
+    });
+
+    // Form Submission
+    loginForm.addEventListener('submit', (e) =>
+    </script>
 </body>
 </html>
