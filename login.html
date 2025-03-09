@@ -3,171 +3,170 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - Powerful Login Page</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>WhatsApp Course Enrollment</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        /* Course Card Styling */
+        .course {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 400px;
+            text-align: left;
+        }
+
+        .course h3 {
+            margin-top: 0;
+            color: #007bff;
+        }
+
+        .price {
+            font-size: 18px;
+            font-weight: bold;
+            color: #28a745;
+        }
+
+        /* Input Field */
+        input[type="tel"] {
+            width: 100%;
+            padding: 10px;
+            margin-top: 8px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        /* Button */
+        button {
+            background: #007bff;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background: #0056b3;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 600px) {
+            .course {
+                max-width: 90%;
+            }
+        }
+    </style>
 </head>
 <body>
 
-    <div class="login-container">
-        <h2>Login to Your Account</h2>
-        <form id="loginForm">
-            <label for="email"><b>Email</b></label>
-            <input type="email" placeholder="Enter your email" name="email" id="email" required>
-            <span id="emailError" class="error-message"></span>
+    <h2>Login to Study</h2>
 
-            <label for="password"><b>Password</b></label>
-            <input type="password" placeholder="Enter your password" name="password" id="password" required>
-            <span id="passwordError" class="error-message"></span>
-            <input type="checkbox" id="showPassword"> Show Password
+    <!-- Microsoft Outlook -->
+    <div class="course">
+        <h3>Microsoft Outlook</h3>
+        <p>Outlook courses teach students how to manage email, calendar, and contacts efficiently. Participants learn to organize their workflow and utilize features that improve communication.</p>
+        <p class="price"></p>
 
-            <div class="remember-me">
-                <input type="checkbox" id="rememberMe"> Remember Me
-            </div>
-
-            <button type="submit" id="loginButton">Login</button>
-            <p><a href="#">Forgot Password?</a></p>
-            <p>Don't have an account? <a href="signup.html">Sign up</a></p>
-        </form>
+        <label for="whatsappNumberOutlook">Enter WhatsApp Number:</label>
+        <input type="tel" id="whatsappNumberOutlook" placeholder="e.g. +2349012345678">
+        <button onclick="verifyWhatsApp('Outlook')">Verify & Enroll</button>
     </div>
 
-    <div id="loadingSpinner" class="loading-spinner" style="display:none;">
-        <div class="spinner"></div>
+    <!-- Microsoft Access -->
+    <div class="course">
+        <h3>Microsoft Access</h3>
+        <p>These courses focus on database management using Microsoft Access. Students learn to create, manage, and analyze databases to store and retrieve information effectively.</p>
+        <p class="price"></p>
+
+        <label for="whatsappNumberAccess">Enter WhatsApp Number:</label>
+        <input type="tel" id="whatsappNumberAccess" placeholder="e.g. +2349012345678">
+        <button onclick="verifyWhatsApp('Access')">Verify & Enroll</button>
     </div>
-<style>
-    /* Global Styles */
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f4f4f4;
-    margin: 0;
-    padding: 0;
-}
 
-/* Login Container Styles */
-.login-container {
-    max-width: 400px;
-    margin: 100px auto;
-    padding: 20px;
-    background: white;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
+ <!-- Diploma in computer -->
+    <div class="course">
+        <h3>Diploma in Computer</h3>
+        <p>A Diploma in Computer usually refers to a Diploma in Computer Science, Computer Engineering, or Information Technology. It is a short-term course (usually 1-3 years) that provides foundational knowledge in computing, programming, networking, and software applications.</p>
+        <p class="price"></p>
 
-/* Header Styles */
-h2 {
-    text-align: center;
-    color: #003366;
-}
+        <label for="whatsappNumberOutlook">Enter WhatsApp Number:</label>
+        <input type="tel" id="whatsappNumberOutlook" placeholder="e.g. +2349012345678">
+        <button onclick="verifyWhatsApp('Outlook')">Verify & Enroll</button>
+    </div>
 
-/* Form Elements */
-label {
-    display: block;
-    margin: 10px 0 5px;
-}
+    <!-- Microsoft Access -->
+    <div class="course">
+        <h3>Result Analys</h3>
+        <p>Result Analysis refers to the process of evaluating and interpreting data from exams, tests, or business performance to gain insights and make informed decisions. It is commonly used in education, business, and research to assess performance, identify trends, and improve future outcomes.</p>
+        <p class="price"></p>
 
-input[type="email"],
-input[type="password"] {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    transition: border-color 0.3s ease;
-}
+        <label for="whatsappNumberAccess">Enter WhatsApp Number:</label>
+        <input type="tel" id="whatsappNumberAccess" placeholder="e.g. +2349012345678">
+        <button onclick="verifyWhatsApp('Access')">Verify & Enroll</button>
+    </div>
 
-input:focus {
-    border-color: #003366;
-    outline: none;
-}
 
-/* Button Styles */
-button {
-    width: 100%;
-    padding: 10px;
-    background-color: #003366;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
 
-button:hover {
-    background-color: #0055b3;
-}
-
-/* Error Message Styles */
-.error-message {
-    color: red;
-    font-size: 0.9em;
-}
-
-/* Remember Me Styles */
-.remember-me {
-    margin: 10px 0;
-}
-
-/* Loading Spinner Styles */
-.loading-spinner {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(255, 255, 255, 0.8);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-}
-
-.spinner {
-    border: 8px solid #f3f3f3; /* Light grey */
-    border-top: 8px solid #3498db; /* Blue */
-    border-radius: 50%;
-    width: 50px;
-    height: 50px;
-    animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-
-/* Responsive Styles */
-@media (max-width: 600px) {
-    .login-container {
-        padding: 15px;
-    }
-}
-</style>
+    
+    <!-- JavaScript for Verification -->
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-    const loginForm = document.getElementById('loginForm');
-    const emailInput = document.getElementById('email');
-    const passwordInput = document.getElementById('password');
-    const emailError = document.getElementById('emailError');
-    const passwordError = document.getElementById('passwordError');
-    const showPasswordCheckbox = document.getElementById('showPassword');
-    const loginButton = document.getElementById('loginButton');
-    const loadingSpinner = document.getElementById('loadingSpinner');
+        // Verified WhatsApp numbers list
+        const verifiedNumbers = [
+            "+2349012345678", 
+            "+1234567890", 
+            "+2349160865640", 
+            "+2348119110043", 
+            "+2348057485891"
+        ]; 
+        
+        // WhatsApp group links for courses
+        const courseLinks = {
+            "Outlook": "https://chat.whatsapp.com/LZegwiF8l3aLnN1EzQ9xVq",
+            "Data Science": "https://chat.whatsapp.com/DjafOjeRQ940dZCSmyXr1g"
+            "Networking": "https://chat.whatsapp.com/BYNJU1qzPNe5ihnhCAxuXF",
+            "Web Development": "https://chat.whatsapp.com/CWckRQfMGc3BWflrtpSdqH"
+            "Introduction to Computer": "https://chat.whatsapp.com/BH5A2uKBXOH8ssmKSi9RNL",
+            "Microsoft Excel": "https://chat.whatsapp.com/CEjronSYten87zPLW18yRd"
 
-    // Show/Hide Password
-    showPasswordCheckbox.addEventListener('change', () => {
-        passwordInput.type = showPasswordCheckbox.checked ? 'text' : 'password';
-    });
+             "Cyber Security": "https://chat.whatsapp.com/HAdzQd1FGBJ8hpDvDt3c7u"
+              "PowerPoint": "https://chat.whatsapp.com/CDsMGaw1P6jAcHH2c1EeX7"
+               };
 
-    // Real-time Email Validation
-    emailInput.addEventListener('input', () => {
-        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailPattern.test(emailInput.value)) {
-            emailError.textContent = 'Please enter a valid email address.';
-        } else {
-            emailError.textContent = '';
+        function verifyWhatsApp(course) {
+            const inputId = `whatsappNumber${course}`;
+            const userNumber = document.getElementById(inputId).value.trim();
+
+            if (!userNumber) {
+                alert("❌ Please enter your WhatsApp number.");
+                return;
+            }
+
+            if (verifiedNumbers.includes(userNumber)) {
+                alert("✅ Verified! Redirecting to WhatsApp group...");
+                window.location.href = courseLinks[course] || "#";
+            } else {
+                alert("❌ Your number is not in the WhatsApp group. Contact support.");
+            }
         }
-    });
-
-    // Form Submission
-    loginForm.addEventListener('submit', (e) =>
     </script>
+
 </body>
 </html>
