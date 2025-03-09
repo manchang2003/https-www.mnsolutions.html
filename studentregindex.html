@@ -3,116 +3,89 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registration Form - Unique Computer Academy</title>
+    <title>Register - Unique Computer Academy</title>
     <style>
-        body { font-family: Arial, sans-serif; text-align: center; padding: 20px; }
-        form { max-width: 500px; margin: auto; padding: 20px; border: 1px solid #ddd; border-radius: 10px; }
-        input, select, textarea, button { width: 100%; padding: 10px; margin-top: 10px; }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+            margin: 50px;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            max-width: 400px;
+            margin: auto;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px gray;
+        }
+        input, select {
+            width: 90%;
+            padding: 10px;
+            margin: 8px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        button {
+            background: #28a745;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+        }
+        button:hover {
+            background: #218838;
+        }
     </style>
 </head>
 <body>
-    <h2>Register for Unique Computer Academy</h2>
-    <form id="registrationForm">
-        <h3>Basic Information</h3>
-        <input type="text" id="name" placeholder="Full Name" required>
-        <input type="email" id="email" placeholder="Email Address" required>
-        <input type="tel" id="phone" placeholder="Phone Number" required>
-        <input type="date" id="dob" placeholder="Date of Birth" required>
-        <select id="gender">
-            <option value="">Select Gender (Optional)</option>
-            <option value="Male">Male</option>
-            <option value="Female">Female</option>
-            <option value="Other">Other</option>
-        </select>
 
-        <h3>Course Selection</h3>
-        <select id="course">
-            <option value="">Select Course</option>
-            <option value="Graphic Design">Graphic Design</option>
-            <option value="Web Development">Web Development</option>
-            <option value="Cybersecurity">Cybersecurity</option>
-        </select>
-        <select id="learningMode">
-            <option value="">Preferred Learning Mode</option>
-            <option value="Live Sessions">Live Sessions</option>
-            <option value="Pre-recorded">Pre-recorded</option>
-            <option value="Self-paced">Self-paced</option>
-        </select>
-        <select id="experienceLevel">
-            <option value="">Experience Level</option>
-            <option value="Beginner">Beginner</option>
-            <option value="Intermediate">Intermediate</option>
-            <option value="Advanced">Advanced</option>
-        </select>
-
-        <h3>Payment Details</h3>
-        <select id="paymentMethod">
-            <option value="">Select Payment Method</option>
-            <option value="Bank Transfer">Bank Transfer</option>
-            <option value="PayPal">PayPal</option>
-            <option value="Card">Card</option>
-            <option value="Mobile Money">Mobile Money</option>
-        </select>
-        <input type="text" id="transactionRef" placeholder="Transaction Reference Number">
-        <input type="text" id="discountCode" placeholder="Discount Code (if applicable)">
-
-        <h3>Technical Requirements</h3>
-        <label>Do you have access to a computer/laptop?</label>
-        <select id="computerAccess">
-            <option value="Yes">Yes</option>
-            <option value="No">No</option>
-        </select>
-        <label>Do you have a stable internet connection?</label>
-        <select id="internetAccess">
-            <option value="Yes">Yes</option>
-            <option value="No">No</option>
-        </select>
-
-        <h3>Additional Information</h3>
-        <textarea id="interest" placeholder="Why are you interested in this course?" rows="3"></textarea>
-        <select id="referral">
-            <option value="">How did you hear about us?</option>
-            <option value="Social Media">Social Media</option>
-            <option value="Referral">Referral</option>
-            <option value="Website">Website</option>
-        </select>
-
-        <h3>Consent & Agreement</h3>
-        <label><input type="checkbox" id="terms" required> I agree to the terms and conditions.</label>
-        <label><input type="checkbox" id="privacy" required> I agree to the privacy policy.</label>
-
-        <button type="button" onclick="sendToWhatsApp()">Register</button>
-    </form>
+    <div class="container">
+        <h2>Register for Unique Computer Academy</h2>
+        <form id="registrationForm">
+            <input type="text" id="fullName" placeholder="Full Name" required><br>
+            <input type="tel" id="phoneNumber" placeholder="Phone Number" required><br>
+            <input type="email" id="email" placeholder="Email Address" required><br>
+            <select id="course">
+                <option value="Web Development">Web Development</option>
+                <option value="Graphics Design">Graphics Design</option>
+                <option value="Computer Basics">Computer Basics</option>
+            </select><br>
+            <button type="submit">Register</button>
+        </form>
+    </div>
 
     <script>
-        function sendToWhatsApp() {
-            var name = document.getElementById('name').value;
-            var email = document.getElementById('email').value;
-            var phone = document.getElementById('phone').value;
-            var dob = document.getElementById('dob').value;
-            var gender = document.getElementById('gender').value;
-            var course = document.getElementById('course').value;
-            var learningMode = document.getElementById('learningMode').value;
-            var experienceLevel = document.getElementById('experienceLevel').value;
-            var paymentMethod = document.getElementById('paymentMethod').value;
-            var transactionRef = document.getElementById('transactionRef').value;
-            var discountCode = document.getElementById('discountCode').value;
-            var computerAccess = document.getElementById('computerAccess').value;
-            var internetAccess = document.getElementById('internetAccess').value;
-            var interest = document.getElementById('interest').value;
-            var referral = document.getElementById('referral').value;
-            var terms = document.getElementById('terms').checked;
-            var privacy = document.getElementById('privacy').checked;
+        document.getElementById("registrationForm").addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevent default form submission
 
-            if(name && email && phone && dob && terms && privacy) {
-                var message = `New Registration:\nName: ${name}\nEmail: ${email}\nPhone: ${phone}\nDOB: ${dob}\nGender: ${gender}\nCourse: ${course}\nLearning Mode: ${learningMode}\nExperience Level: ${experienceLevel}\nPayment: ${paymentMethod}, Ref: ${transactionRef}\nDiscount Code: ${discountCode}\nComputer Access: ${computerAccess}\nInternet Access: ${internetAccess}\nInterest: ${interest}\nReferral: ${referral}`;
-                
-                var whatsappGroupLink = "https://chat.whatsapp.com/G61qIt0bDvL3LyQOkMWe3X" + encodeURIComponent(message);
-                window.open(whatsappGroupLink, '_blank');
-            } else {
-                alert("Please fill in all required fields and accept terms & privacy policy.");
-            }
-        }
+            // Get form values
+            const name = document.getElementById("fullName").value;
+            const phone = document.getElementById("phoneNumber").value;
+            const email = document.getElementById("email").value;
+            const course = document.getElementById("course").value;
+
+            // Encode the data for WhatsApp
+            const message = `New Registration for Unique Computer Academy:
+            %0A👤 Name: ${name}
+            %0A📞 Phone: ${phone}
+            %0A✉ Email: ${email}
+            %0A📚 Course: ${course}`;
+
+            // WhatsApp group link (Replace with your group phone number)
+            const whatsappNumber = "+234 911 279 5663"; // Your WhatsApp group admin number
+            const whatsappLink = `https://chat.whatsapp.com/FWChEn5hc0A6CdFsQXFs4b${whatsappNumber}?text=${message}`;
+
+            // Redirect to WhatsApp
+            window.location.href = whatsappLink;
+
+            // Redirect back to main site after 5 seconds
+            setTimeout(() => {
+                window.location.href = "https://manchang2003.github.io/https-www.mnsolutions.html/login.html"; // Replace with your site link
+            }, 5000);
+        });
     </script>
+
 </body>
 </html>
