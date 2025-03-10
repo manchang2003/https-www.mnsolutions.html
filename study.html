@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unique Computer Academy - Courses</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+            margin: 50px;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            max-width: 600px;
+            margin: auto;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px gray;
+        }
+        .course-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        .course-item {
+            background: #007bff;
+            color: white;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .course-item:hover {
+            background: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Welcome to Unique Computer Academy</h2>
+        <p>Select a course to start studying:</p>
+        <ul class="course-list">
+            <li class="course-item" onclick="startCourse('web-development.html')">Web Development</li>
+            <li class="course-item" onclick="startCourse('graphics-design.html')">Graphics Design</li>
+            <li class="course-item" onclick="startCourse('computer-basics.html')">Computer Basics</li>
+            <li class="course-item" onclick="startCourse('programming-fundamentals.html')">Programming Fundamentals</li>
+            <li class="course-item" onclick="startCourse('cyber-security.html')">Cyber Security</li>
+  <li class="course-item" onclick="startCourse('cyber-security.html')">Internet Security</li>
+        </ul>
+    </div>
+    
+    <script>
+        function startCourse(courseLink) {
+            window.location.href = courseLink;
+        }
+    </script>
+</body>
+</html>
