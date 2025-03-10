@@ -46,6 +46,7 @@
             <li class="course-item" onclick="startCourse('computer-basics.html')">Computer Basics</li>
             <li class="course-item" onclick="startCourse('programming-fundamentals.html')">Programming Fundamentals</li>
             <li class="course-item" onclick="startCourse('cyber-security.html')">Cyber Security</li>
+  <li class="course-item" onclick="startCourse('cyber-security.html')">Internet Security</li>
         </ul>
     </div>
     
