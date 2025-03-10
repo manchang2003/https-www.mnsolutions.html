@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Development Courses</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            text-align: center;
+        }
+        .lesson {
+            margin-bottom: 20px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background: #fafafa;
+        }
+        video, audio {
+            width: 100%;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Web Development Lessons</h2>
+        
+        <div class="lesson">
+            <h3>Lesson 1: Introduction to HTML</h3>
+            <p>HTML is the foundation of web development. Learn the basics of structuring a webpage.</p>
+            <video controls>
+                <source src="lesson1.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <audio controls>
+                <source src="lesson1.mp3" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+            <p><strong>Text Lesson:</strong> HTML stands for HyperText Markup Language. It is used to create the structure of a webpage.</p>
+        </div>
+        
+        <div class="lesson">
+            <h3>Lesson 2: Introduction to CSS</h3>
+            <p>CSS styles the web page and makes it visually appealing.</p>
+            <video controls>
+                <source src="lesson2.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <audio controls>
+                <source src="lesson2.mp3" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+            <p><strong>Text Lesson:</strong> CSS stands for Cascading Style Sheets. It is used to control the appearance of a webpage.</p>
+        </div>
+    </div>
+    <h1>Download Your Handout</h1>
+    <button onclick="authenticate()">Download</button>
+    <ul id="file-list"></ul>
+
+    <script>
+        function authenticate() {
+            window.location.href = "https://drive.google.com/file/d/1y3-P3SuOJK0igkszuCwftZEgqxJoSHPk/view?usp=drive_link";
+        }
+
+        async function fetchFiles() {
+            const response = await fetch("https://drive.google.com/file/d/1y3-P3SuOJK0igkszuCwftZEgqxJoSHPk/view?usp=drive_link");
+            const files = await response.json();
+            const list = document.getElementById("file-list");
+            list.innerHTML = "";
+            files.forEach(file => {
+                const li = document.createElement("li");
+                li.innerHTML = `${file.name} <a href="https://drive.google.com/file/d/1y3-P3SuOJK0igkszuCwftZEgqxJoSHPk/view?usp=drive_link${file.id}" download>Download</a>`;
+                list.appendChild(li);
+            });
+        }
+
+        window.onload = fetchFiles;
+    </script>
+
+</body>
+</html>
