@@ -43,7 +43,7 @@
             <h3>Lesson 1: Introduction to HTML</h3>
             <p>HTML is the foundation of web development. Learn the basics of structuring a webpage.</p>
             <video controls>
-                <source src="lesson1.mp4" type="video/mp4">
+                <source src="https://drive.google.com/file/d/1o9l6D8Uv7jmXfVtmQuo5X-b8UK9tpVTI/view?usp=sharing" type="video/mp4">
                 Your browser does not support the video tag.
             </video>
             <audio controls>
@@ -108,6 +108,29 @@
             files.forEach(file => {
                 const li = document.createElement("li");
                 li.innerHTML = `${file.name} <a href="https://drive.google.com/file/d/1j48qcDEsdk9I6DXwuubYloHBk1OrXCqS/view?usp=drive_link${file.id}" download>Download</a>`;
+                list.appendChild(li);
+            });
+        }
+
+        window.onload = fetchFiles;
+    </script>
+       <h1>Download Practical Guide</h1>
+    <button onclick="authenticate()">Download</button>
+    <ul id="file-list"></ul>
+
+    <script>
+        function authenticate() {
+            window.location.href = "https://drive.google.com/file/d/1GcnIm3V4zi6tw46r6y5_Zuya1kHfbZqO/view?usp=drive_link";
+        }
+
+        async function fetchFiles() {
+            const response = await fetch("https://drive.google.com/file/d/1GcnIm3V4zi6tw46r6y5_Zuya1kHfbZqO/view?usp=drive_link");
+            const files = await response.json();
+            const list = document.getElementById("file-list");
+            list.innerHTML = "";
+            files.forEach(file => {
+                const li = document.createElement("li");
+                li.innerHTML = `${file.name} <a href="https://drive.google.com/file/d/1GcnIm3V4zi6tw46r6y5_Zuya1kHfbZqO/view?usp=drive_link${file.id}" download>Download</a>`;
                 list.appendChild(li);
             });
         }
