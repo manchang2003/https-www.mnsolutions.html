@@ -97,17 +97,17 @@
 
     <script>
         function authenticate() {
-            window.location.href = "https://drive.google.com/file/d/1s63NXlibiNZNi1HdjrtdOJ9JIZn2HAir/view?usp=drive_link";
+            window.location.href = "https://drive.google.com/file/d/1j48qcDEsdk9I6DXwuubYloHBk1OrXCqS/view?usp=drive_link";
         }
 
         async function fetchFiles() {
-            const response = await fetch("https://drive.google.com/file/d/1s63NXlibiNZNi1HdjrtdOJ9JIZn2HAir/view?usp=drive_link");
+            const response = await fetch("https://drive.google.com/file/d/1j48qcDEsdk9I6DXwuubYloHBk1OrXCqS/view?usp=drive_link");
             const files = await response.json();
             const list = document.getElementById("file-list");
             list.innerHTML = "";
             files.forEach(file => {
                 const li = document.createElement("li");
-                li.innerHTML = `${file.name} <a href="https://drive.google.com/file/d/1s63NXlibiNZNi1HdjrtdOJ9JIZn2HAir/view?usp=drive_link${file.id}" download>Download</a>`;
+                li.innerHTML = `${file.name} <a href="https://drive.google.com/file/d/1j48qcDEsdk9I6DXwuubYloHBk1OrXCqS/view?usp=drive_link${file.id}" download>Download</a>`;
                 list.appendChild(li);
             });
         }
