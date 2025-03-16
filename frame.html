@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Unique Computer Academy</title>
     <link rel="stylesheet" href="styles.css">
-    <script defer src="script.js"></script>
+    
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -92,7 +92,7 @@
         <nav>
             <ul>
                 <li><a href="#home">Home</a></li>
-                <li><a href="Login.html">Login</a></li>
+                <li><a href="login.html">Login</a></li>
                 <li><a href="signup.html">Sign Up</a></li>
                 <li><a href="courses.html">Courses</a></li>
                 <li><a href="aboutus2.html">About Us</a></li>
@@ -142,5 +142,78 @@
             document.getElementById("response-msg").innerText = "Thank you for reaching out! We will contact you soon.";
         });
     </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+    // Contact Form Submission Handling
+    document.getElementById("contact-form").addEventListener("submit", function (event) {
+        event.preventDefault();
+        document.getElementById("response-msg").innerText = "Thank you for reaching out! We will contact you soon.";
+    });
+
+    // Smooth Scrolling for Navigation Links
+    document.querySelectorAll("nav ul li a").forEach(anchor => {
+        anchor.addEventListener("click", function (event) {
+            event.preventDefault();
+            const targetSection = document.querySelector(this.getAttribute("href"));
+            if (targetSection) {
+                window.scrollTo({
+                    top: targetSection.offsetTop - 50,
+                    behavior: "smooth"
+                });
+            }
+        });
+    });
+
+    // Responsive Navigation Toggle (for smaller screens)
+    const navMenu = document.querySelector("nav ul");
+    const menuToggle = document.createElement("button");
+    menuToggle.innerText = "☰";
+    menuToggle.style.fontSize = "24px";
+    menuToggle.style.border = "none";
+    menuToggle.style.background = "transparent";
+    menuToggle.style.color = "white";
+    menuToggle.style.cursor = "pointer";
+    menuToggle.style.display = "none";
+
+    document.querySelector("header").insertBefore(menuToggle, navMenu);
+
+    menuToggle.addEventListener("click", function () {
+        navMenu.style.display = navMenu.style.display === "flex" ? "none" : "flex";
+    });
+
+    function checkScreenSize() {
+        if (window.innerWidth <= 768) {
+            navMenu.style.display = "none";
+            menuToggle.style.display = "block";
+        } else {
+            navMenu.style.display = "flex";
+            menuToggle.style.display = "none";
+        }
+    }
+
+    window.addEventListener("resize", checkScreenSize);
+    checkScreenSize();
+});
+
+    </script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    // Check if the browser supports notifications
+    if ("Notification" in window) {
+        // Request permission
+        Notification.requestPermission().then(function (permission) {
+            if (permission === "granted") {
+                // Show the notification
+                new Notification("Welcome to Unique Computer Academy!", {
+                    body: "Enhance your skills with our expert courses.",
+                    icon: "https://example.com/logo.png" // Replace with your actual logo
+                });
+            }
+        });
+    }
+});
+</script>
+
+
 </body>
 </html>
