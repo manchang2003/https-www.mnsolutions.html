@@ -3,197 +3,142 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Unique Computer Academy - Online School</title>
+    <title>Unique Computer Academy</title>
+    <link rel="stylesheet" href="styles.css">
+    <script defer src="script.js"></script>
     <style>
-        /* Global Styling */
-        * {
+        body {
+            font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f4f4f9;
-            color: #333;
-        }
-
-        /* Header and Navigation Bar Styling */
-        header {
-            background-color: #003366;
-            padding: 15px 0;
-            color: white;
             text-align: center;
         }
-   header img {
-             height: 50px; /* Set image height */
-            margin-right: 20px; /* Add space between image and content */
-            display: inline-block; /* Ensure image remains inline with text */
-           margin-items:left; /*Alignment to left toppest*/
-        }
-              
-        nav {
-            background-color: #0055b3;
-            padding: 10px;
+        header {
+            background: #333;
+            color: white;
+            padding: 15px 0;
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
         }
-
-        nav a {
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+        }
+        nav ul li {
+            margin: 0 15px;
+        }
+        nav ul li a {
             color: white;
             text-decoration: none;
-            margin: 0 15px;
             font-size: 18px;
-            transition: color 0.3s ease;
         }
-
-        nav a:hover {
-            color: #ffcc00;
-        }
-
-        /* Main Section */
-        main {
-            text-align: center;
-            padding: 60px 20px;
-        }
-
-        h1 {
-            margin: 0; /* Remove margin from the heading */
-            font-size: 36px;
+        .hero {
+            background: url('hero-image.jpg') no-repeat center center/cover;
             color: white;
+            padding: 50px 20px;
         }
-         h2 {
-            margin: 0; /* Remove margin from the heading */
-            font-size: 36px;
-            color: black;
+        .btn {
+            display: inline-block;
+            background: #ff6600;
+            color: white;
+            padding: 10px 20px;
+            margin-top: 10px;
+            text-decoration: none;
+            font-size: 18px;
+            border-radius: 5px;
         }
-
-        p {
-            font-size: 20px;
-            line-height: 1.6;
+        .course-list {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
             margin: 20px 0;
         }
-
-        /* Section Styling */
-        .section {
-            padding: 50px;
-            background-color: #e9ecef;
-            border-radius: 8px;
-            margin: 40px 0;
+        .course-item {
+            background: #f4f4f4;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
         }
-
-        .section h2 {
-            font-size: 28px;
-            color: #333;
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
-
-        .section p {
-            font-size: 18px;
-            color: #666;
+        form input, form textarea {
+            width: 80%;
+            margin: 10px 0;
+            padding: 10px;
         }
-
-        /* Footer Styling */
-        footer {
-            background-color: #003366;
+        button {
+            background: #ff6600;
             color: white;
-            text-align: center;
-            padding: 20px 0;
-            margin-top: 40px;
-        }
-
-        footer p {
-            margin: 0;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            nav {
-                flex-direction: column;
-            }
-
-            nav a {
-                margin: 10px 0;
-            }
-
-            main h1 {
-                font-size: 28px;
-            }
-
-            main p {
-                font-size: 18px;
-            }
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
         }
     </style>
 </head>
 <body>
-
-<!-- Header -->
-<header>
-      <img src="cscs.jpg"> <!-- Replace with your logo URL -->
-       <h1>WELCOME TO UNQUE COMPUTER ACADEMY</h1>
-    <p>Computer Experts Perfecter</p>
-  
-</header>
-
-<!-- Navigation Bar -->
-<nav>
-    <a href="frame.html">Home</a>
-    <a href="courses.html">Courses</a>
-    <a href="studentregindex.html">Registration</a>
-    <a href="lecturetime.html">Lessons time</a>
-    <a href="paymentindex.html">Payment</a>
-    <a href="signup.html">Sign Up</a>
-    <a href="login.html">Login</a>
-    <a href="aboutus.html">Contact Us</a>
-    <a href="aboutus2.html">About Us</a>
-</nav>
-
-<!-- Main Section -->
-<main>
-    <h2>Empowering the Next Generation of Tech Leaders</h2>
-    <p>At Unique Computer Academy, we offer cutting-edge courses designed to help you succeed in the fast-evolving world of technology. Our expert instructors, hands-on learning, and flexible online programs will help you advance your career in web development, data science, networking, and cyber security.</p>
-
-    <!-- Course Overview Section -->
-    <div class="section" id="course">
+    <header>
+        <div class="logo">Unique Computer Academy</div>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#courses">Courses</a></li>
+                <li><a href="#about">About Us</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <section id="home" class="hero">
+        <h1>Welcome to Unique Computer Academy</h1>
+        <p>Empowering the next generation with technology skills.</p>
+        <a href="#courses" class="btn">Explore Courses</a>
+    </section>
+    
+    <section id="courses">
         <h2>Our Courses</h2>
-        <p>We offer a variety of courses, including Web Development, Data Science, Networking, Cyber Security etc. Explore the options and find the right fit for you.</p>
-    </div>
-
-    <!-- Registration Section -->
-    <div class="section" id="registration">
-        <h2>Registration</h2>
-        <p>Ready to join? Sign up for our upcoming sessions today and start your journey towards a rewarding career in tech.</p>
-    </div>
-
-    <!-- Payment Section -->
-    <div class="section" id="payment">
-        <h2>Payment</h2>
-        <p>Secure your spot in the course by making a payment using our secure online payment portal. Multiple payment methods are accepted.</p>
-    </div>
-
-    <!-- Signup Section -->
-    <div class="section" id="signup">
-        <h2>Sign Up</h2>
-        <p>New here? Create an account and gain access to all the resources and courses available at MN Computer Academy.</p>
-    </div>
-
-    <!-- Login Section -->
-    <div class="section" id="login">
-        <h2>Login</h2>
-        <p>Already have an account? Log in to access your courses, track progress, and manage your account.</p>
-    </div>
-
-    <!-- Contact Us Section -->
-    <div class="section" id="contact">
+        <div class="course-list">
+            <div class="course-item">Web Development</div>
+            <div class="course-item">Graphic Design</div>
+            <div class="course-item">Computer Networking</div>
+        </div>
+    </section>
+    
+    <section id="about">
+        <h2>Why Choose Us?</h2>
+        <p>We provide industry-standard training with experienced instructors.</p>
+    </section>
+    
+    <section id="contact">
         <h2>Contact Us</h2>
-        <p>If you have any questions, feel free to reach out to our support team. We’re here to help!</p>
-    </div>
-</main>
-
-<!-- Footer -->
-<footer>
-    <p>&copy; 2024 Unique Computer Academy. All rights reserved.</p>
-</footer>
-
+        <form id="contact-form">
+            <input type="text" placeholder="Your Name" required>
+            <input type="email" placeholder="Your Email" required>
+            <textarea placeholder="Your Message" required></textarea>
+            <button type="submit">Send Message</button>
+        </form>
+        <p id="response-msg"></p>
+    </section>
+    
+    <footer>
+        <p>&copy; 2025 Unique Computer Academy. All rights reserved.</p>
+    </footer>
+    
+    <script>
+        document.getElementById("contact-form").addEventListener("submit", function(event) {
+            event.preventDefault();
+            document.getElementById("response-msg").innerText = "Thank you for reaching out! We will contact you soon.";
+        });
+    </script>
 </body>
 </html>
