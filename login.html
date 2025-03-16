@@ -1,1 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Catalog - Unique Computer Academy</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            text-align: center;
+        }
+        .container {
+            max-width: 400px;
+            background: white;
+            padding: 20px;
+            margin: 100px auto;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        input, button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #28a745;
+            color: white;
+            cursor: pointer;
+        }
+        .courses {
+            display: none;
+            max-width: 800px;
+            margin: 20px auto;
+        }
+        .course-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        .course {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Login Form -->
+    <div class="container" id="login-container">
+        <h2>Login to View Courses</h2>
+        <input type="text" id="username" placeholder="Enter Username">
+        <input type="password" id="password" placeholder="Enter Password">
+        <button onclick="login()">Login</button>
+        <p id="error-message" style="color: red; display: none;">Invalid Credentials!</p>
+    </div>
+
+    <!-- Courses Catalog -->
+    <div class="courses" id="course-container">
+        <h2>Available Courses</h2>
+        <div class="course-list">
+            <div class="course">
+                <h3>Web Development</h3>
+                <p>Learn HTML, CSS, JavaScript, and build amazing websites.</p>
+               <a href="webdevelopment.html"> <button class="login-btn" onclick="showLogin('')">Login</button></a>
+            </div>
+            <div class="course">
+                <h3>Python Programming</h3>
+                <p>Master Python for automation, data science, and AI.</p>
+                <button class="login-btn" onclick="showLogin('Graphic Design')">Login</button>
+            </div>
+            <div class="course">
+                <h3>Graphic Design</h3>
+                <p>Become a pro in Photoshop, Illustrator, and UI/UX design.</p>
+            </div>
+            <div class="course">
+                <h3>JAMB Tutorial</h3>
+                <p>coming Soon</p>
+            </div>
+
+            <div class="course">
+                <h3>Cybersecurity</h3>
+                <p>Learn how to secure systems and prevent cyber threats.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        
+        function login() {
+            var username = document.getElementById("username").value;
+            var password = document.getElementById("password").value;
+
+            // Simple username/password check (Replace with real authentication)
+            if (username === "admin" && password === "password123") {
+                document.getElementById("login-container").style.display = "none";
+                document.getElementById("course-container").style.display = "block";
+            } else {
+                document.getElementById("error-message").style.display = "block";
+            }
+        }
+    </script>
+
+</body>
+</html>
 
