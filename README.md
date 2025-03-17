@@ -1,91 +1,35 @@
-## Installation
+README - Unique Computer Academy
+📌 About Unique Computer Academy
+Welcome to Unique Computer Academy, a premier institution dedicated to empowering individuals with essential tech skills. We offer cutting-edge courses designed to help students, professionals, and businesses thrive in the digital age.
 
-Follow these steps to install and run MN Online School locally:
+🎓 Courses We Offer
+We provide a variety of industry-relevant courses, including:
 
-### Prerequisites
+✅ Web Development – Learn HTML, CSS, JavaScript, and frameworks like React and Node.js.
+✅ Python Programming – Master Python for web development, AI, and automation.
+✅ Graphic Design – Get hands-on experience with Photoshop, Illustrator, and UI/UX design.
+✅ Cybersecurity – Learn how to secure systems and prevent cyber threats.
+✅ Data Science & AI – Explore machine learning, big data, and AI applications.
+✅ Microsoft Office & Productivity Tools – Excel, Word, PowerPoint, and more for workplace efficiency.
 
-Make sure you have the following installed:
-- **Node.js** (version X.X.X or later)
-- **npm** (comes with Node.js)
-- A **Git** client
+🔑 How to Access Our Courses
+1️⃣ Register/Login to your account on our platform.
+2️⃣ Choose from a wide range of courses based on your interests.
+3️⃣ Start learning through video lectures, hands-on projects, and live sessions.
+4️⃣ Earn a certificate upon successful course completion.
 
-### Steps to Install
+💡 Why Choose Us?
+🚀 Experienced Instructors – Learn from industry experts.
+📚 Hands-on Learning – Practical assignments and real-world projects.
+🌍 Flexible Learning – Online and in-person classes available.
+🎖 Certification – Get industry-recognized certifications.
+📈 Career Support – Job placement assistance and career guidance.
 
-1. **Clone the Repository**:
-   ```bash
-   git clone [https://github.com/username/mn-online-school.git](https://manchang2003.github.io/https-www.mnsolutions.html/frame.html)
-   ## Installation
+📞 Contact Us
+📍 Address: Opposite ICT, Federal University of Education, Pankshin
+📞 Phone: 09160865640, 09112795663
+📧 Email: mcnprograming@gmail.com
+🌐 Website: https://github.com/manchang2003/https-www.mnsolutions.html
 
-Follow these steps to set up the MN Online School project locally:
-
-### Prerequisites
-
-Make sure you have the following installed:
-- **Node.js** (v14.x or later)
-- **npm** (v6.x or later)
-- **Git**
-
-### Step-by-Step Guide
-
-#### 1. Clone the Repository
-
-Start by cloning the repository to your local machine using Git. Run the following command:
-
-```bash
-git clone https://github.com/username/mn-online-school.git
-cd mn-online-school
-cd mn-online-school
-npm install
-npm install
-DB_HOST=localhost
-DB_USER=root
-DB_PASS=example
-npm start
-DATABASE_URL=mongodb://localhost:27017/mn-online-school
-PORT=4000
-API_KEY=your-api-key-here
-npm run dev
-http://localhost:3000
-npm start
-npm test
-
-### 2. **Add a `.gitignore` File**
-
-Make sure to include a `.gitignore` file to exclude sensitive files like `.env`, `node_modules`, and others that don’t need to be tracked by Git. Example `.gitignore`:
-
-```plaintext
-# Ignore node_modules
-node_modules/
-
-# Ignore environment variables
-.env
-
-# Other files or folders to ignore
-/dist
-.DS_Store
-
-### 2. **Push Your Changes to GitHub**
-Once you've written the installation guide in your `README.md`, follow these steps to push your changes to GitHub:
-
-1. **Stage the changes**:
-   ```bash
-   git add README.md
-{
-  "name": "mn-online-school",
-  "version": "1.0.0",
-  "description": "MN Online School - A platform for online education",
-  "main": "index.js",
-  "scripts": {
-    "start": "node index.js",
-    "dev": "nodemon index.js"
-  },
-  "dependencies": {
-    "express": "^4.17.1",
-    "dotenv": "^8.2.0"
-  },
-  "devDependencies": {
-    "nodemon": "^2.0.7"
-  }
-}
-git push origin main
+🚀 Start your journey with Unique Computer Academy today! 🚀
 
