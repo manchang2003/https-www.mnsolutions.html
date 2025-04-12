@@ -273,20 +273,14 @@ button {
 .marquee:hover .marquee-text {
   animation-play-state: paused;
 }
-/* Reduce video size with fixed width and height */
-.responsive-video {
-  width: 60%; /* Adjust the width as needed */
-  max-width: 800px; /* Set a maximum width */
-  margin: 0 auto; /* Center the video horizontally */
-}
+<div class="responsive-video">
+  <!-- Video embed or direct video file -->
+  <video controls autoplay muted>
+    <source src="ucaadvert1.mp4" type="video/mp4" />
+    Your browser does not support the video tag.
+  </video>
+</div>
 
-.responsive-video iframe,
-.responsive-video video {
-  width: 100%; /* Make the video take the full width of the container */
-  height: auto; /* Maintain aspect ratio */
-  border-radius: 10px; /* Optional: Add rounded corners */
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Optional: Add a shadow */
-}
     /* Basic styles for the notification box */
 .notification {
   display: none; /* Hidden by default */
@@ -392,7 +386,7 @@ footer {
 
 <!-- Notification Box -->
 <div id="notification" class="notification">
-  <span class="notification-text">This is a notification!</span>
+  <span class="notification-text">Confirm from the school any courses that you do not understand the procedure for registeration before registering!</span>
   <button class="close-btn" id="close-notification">X</button>
 </div>
 
