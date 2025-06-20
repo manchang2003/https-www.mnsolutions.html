@@ -1,0 +1,1114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GMSS Pankshin - School Portal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #1a4d2e; /* GMSS official green */
+            --secondary: #f5a623; /* GMSS gold */
+            --accent: #2e7d32; /* Darker green */
+            --dark: #222;
+            --light: #f8f9fa;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background-color: var(--light);
+            color: var(--dark);
+        }
+
+        .school-theme {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+        }
+
+        .card {
+            transition: all 0.2s ease;
+            border-radius: 0.5rem;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .grade-A { color: #1a4d2e; font-weight: bold; }
+        .grade-B { color: #2e7d32; font-weight: bold; }
+        .grade-C { color: #f5a623; font-weight: bold; }
+        .grade-D { color: #e67e22; font-weight: bold; }
+        .grade-F { color: #c0392b; font-weight: bold; }
+
+        .logo-container {
+            width: 4rem;
+            height: 4rem;
+            border-radius: 50%;
+            background-color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 3px solid var(--secondary);
+        }
+
+        .input-field {
+            transition: all 0.2s ease;
+            border: 1px solid #d1d5db;
+        }
+
+        .input-field:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(26, 77, 46, 0.1);
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+            transition: all 0.2s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--accent);
+            transform: translateY(-1px);
+        }
+
+        .loading-spinner {
+            border: 3px solid rgba(0, 0, 0, 0.1);
+            border-radius: 50%;
+            border-top: 3px solid var(--primary);
+            width: 20px;
+            height: 20px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .term-filter {
+            display: inline-flex;
+            border-radius: 0.5rem;
+            overflow: hidden;
+            margin-bottom: 1rem;
+            background-color: #f3f4f6;
+        }
+
+        .term-btn {
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: none;
+            background: none;
+        }
+
+        .term-btn.active {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .term-btn:not(.active):hover {
+            background-color: #e5e7eb;
+        }
+
+        .responsive-table {
+            width: 100%;
+            overflow-x: auto;
+        }
+
+        @media (max-width: 768px) {
+            .responsive-table {
+                display: block;
+            }
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+    <!-- App Container -->
+    <div id="app" class="flex-1 flex flex-col">
+        <!-- Login View -->
+        <div id="login-view" class="flex-1 flex items-center justify-center p-4 bg-gray-50">
+            <div class="w-full max-w-md mx-auto">
+                <div class="card bg-white">
+                    <!-- Header -->
+                    <div class="school-theme p-6 text-center">
+                        <div class="flex flex-col items-center">
+                            <div class="logo-container mb-4">
+                                <i class="fas fa-school text-2xl text-green-800"></i>
+                            </div>
+                            <h1 class="text-2xl font-bold">GMSS PANKSHIN</h1>
+                            <p class="text-sm opacity-90">Government Model Secondary School</p>
+                        </div>
+                    </div>
+
+                    <!-- Login Form -->
+                    <div class="p-6">
+                        <!-- Role Selector -->
+                        <div class="flex mb-6 rounded-lg overflow-hidden border border-gray-200">
+                            <button id="student-login-btn" class="flex-1 py-2 px-4 font-medium text-white bg-green-700 focus:outline-none">
+                                Student
+                            </button>
+                            <button id="teacher-login-btn" class="flex-1 py-2 px-4 font-medium bg-gray-100 text-gray-700 focus:outline-none">
+                                Teacher
+                            </button>
+                        </div>
+
+                        <!-- Student Login Form -->
+                        <form id="student-login-form" class="space-y-4">
+                            <div>
+                                <label for="student-id" class="block text-sm font-medium text-gray-700 mb-1">Admission Number</label>
+                                <div class="relative rounded-md">
+                                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                        <span class="text-gray-500 text-sm">GMSS/</span>
+                                    </div>
+                                    <input type="text" id="student-id" class="input-field block w-full pl-14 pr-3 py-2 rounded-md" placeholder="2023/001" required>
+                                </div>
+                            </div>
+
+                            <div>
+                                <label for="student-password" class="block text-sm font-medium text-gray-700 mb-1">Password</label>
+                                <input type="password" id="student-password" class="input-field block w-full px-3 py-2 rounded-md" placeholder="••••••••" required>
+                            </div>
+
+                            <div class="pt-2">
+                                <button type="submit" class="btn-primary w-full py-2 px-4 rounded-md font-medium">
+                                    Sign In as Student
+                                </button>
+                            </div>
+                        </form>
+
+                        <!-- Teacher Login Form -->
+                        <form id="teacher-login-form" class="space-y-4 hidden">
+                            <div>
+                                <label for="teacher-id" class="block text-sm font-medium text-gray-700 mb-1">Staff ID</label>
+                                <div class="relative rounded-md">
+                                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                        <span class="text-gray-500 text-sm">GMSS/STAFF/</span>
+                                    </div>
+                                    <input type="text" id="teacher-id" class="input-field block w-full pl-20 pr-3 py-2 rounded-md" placeholder="001" required>
+                                </div>
+                            </div>
+
+                            <div>
+                                <label for="teacher-password" class="block text-sm font-medium text-gray-700 mb-1">Password</label>
+                                <input type="password" id="teacher-password" class="input-field block w-full px-3 py-2 rounded-md" placeholder="••••••••" required>
+                            </div>
+
+                            <div class="pt-2">
+                                <button type="submit" class="btn-primary w-full py-2 px-4 rounded-md font-medium">
+                                    Sign In as Teacher
+                                </button>
+                            </div>
+                        </form>
+
+                        <div class="mt-4 text-center text-sm">
+                            <a href="#" class="text-green-700 hover:text-green-600">Forgot password? Contact Admin</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-4 text-center text-xs text-gray-500">
+                    © 2023 GMSS Pankshin. All rights reserved.
+                </div>
+            </div>
+        </div>
+
+        <!-- Student Dashboard -->
+        <div id="student-dashboard" class="hidden flex-1 flex flex-col">
+            <!-- Header -->
+            <header class="school-theme shadow-md">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
+                    <div class="flex justify-between items-center">
+                        <div class="flex items-center space-x-3">
+                            <div class="logo-container">
+                                <i class="fas fa-user-graduate text-xl text-green-800"></i>
+                            </div>
+                            <div>
+                                <h1 class="text-lg font-bold">Student Portal</h1>
+                                <p class="text-xs opacity-90">GMSS Pankshin</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-4">
+                            <div class="text-right">
+                                <div id="student-name-display" class="font-medium">John Doe</div>
+                                <div id="student-class-display" class="text-xs opacity-90">JS3A</div>
+                            </div>
+                            <button id="student-logout-btn" class="px-3 py-1 bg-white text-green-800 rounded-md text-sm font-medium hover:bg-gray-50">
+                                Logout
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Main Content -->
+            <main class="flex-1 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+                <!-- Term Filter -->
+                <div class="term-filter">
+                    <button class="term-btn active" data-term="first">First Term</button>
+                    <button class="term-btn" data-term="second">Second Term</button>
+                    <button class="term-btn" data-term="third">Third Term</button>
+                </div>
+
+                <!-- Results Section -->
+                <section class="mb-8">
+                    <h2 class="text-xl font-bold text-gray-800 mb-4">Academic Results</h2>
+                    <div id="student-results-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                        <!-- Results cards will be inserted here -->
+                    </div>
+                </section>
+
+                <!-- Performance Summary -->
+                <section class="mb-8">
+                    <h2 class="text-xl font-bold text-gray-800 mb-4">Performance Summary</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <!-- GPA Card -->
+                        <div class="card bg-white p-4 border-l-4 border-green-600">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <h3 class="text-sm font-medium text-gray-600">Term Average</h3>
+                                    <p class="text-2xl font-bold text-green-700 mt-1" id="student-average">78.5%</p>
+                                </div>
+                                <i class="fas fa-percentage text-green-500 text-xl"></i>
+                            </div>
+                            <div class="mt-2 text-xs text-gray-500">Current Term Performance</div>
+                        </div>
+
+                        <!-- Position Card -->
+                        <div class="card bg-white p-4 border-l-4 border-yellow-500">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <h3 class="text-sm font-medium text-gray-600">Class Position</h3>
+                                    <p class="text-2xl font-bold text-yellow-600 mt-1" id="student-position">5<sup>th</sup></p>
+                                </div>
+                                <i class="fas fa-trophy text-yellow-500 text-xl"></i>
+                            </div>
+                            <div class="mt-2 text-xs text-gray-500">Out of 42 students</div>
+                        </div>
+
+                        <!-- Attendance Card -->
+                        <div class="card bg-white p-4 border-l-4 border-blue-500">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <h3 class="text-sm font-medium text-gray-600">Attendance</h3>
+                                    <p class="text-2xl font-bold text-blue-600 mt-1" id="student-attendance">92%</p>
+                                </div>
+                                <i class="fas fa-calendar-check text-blue-500 text-xl"></i>
+                            </div>
+                            <div class="mt-2 text-xs text-gray-500">Current Term</div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Report Card -->
+                <section>
+                    <h2 class="text-xl font-bold text-gray-800 mb-4">Detailed Report Card</h2>
+                    <div class="card bg-white overflow-hidden">
+                        <div class="responsive-table">
+                            <table class="min-w-full divide-y divide-gray-200">
+                                <thead class="bg-gray-50">
+                                    <tr>
+                                        <th scope="col" class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Subject</th>
+                                        <th scope="col" class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">CA (30%)</th>
+                                        <th scope="col" class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Exam (70%)</th>
+                                        <th scope="col" class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Total</th>
+                                        <th scope="col" class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Grade</th>
+                                        <th scope="col" class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Remark</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="bg-white divide-y divide-gray-200" id="report-card-table">
+                                    <!-- Report card rows will be inserted here -->
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="p-4 border-t border-gray-200">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <p class="text-sm text-gray-600">Form Teacher Remarks:</p>
+                                    <p class="font-medium" id="form-teacher-remarks">Good performance. Keep it up!</p>
+                                </div>
+                                <div>
+                                    <p class="text-sm text-gray-600">Principal Remarks:</p>
+                                    <p class="font-medium" id="principal-remarks">Promoted to next class</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+
+        <!-- Teacher Dashboard -->
+        <div id="teacher-dashboard" class="hidden flex-1 flex flex-col">
+            <!-- Header -->
+            <header class="school-theme shadow-md">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
+                    <div class="flex justify-between items-center">
+                        <div class="flex items-center space-x-3">
+                            <div class="logo-container">
+                                <i class="fas fa-chalkboard-teacher text-xl text-green-800"></i>
+                            </div>
+                            <div>
+                                <h1 class="text-lg font-bold">Teacher Portal</h1>
+                                <p class="text-xs opacity-90">GMSS Pankshin</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-4">
+                            <div class="text-right">
+                                <div id="teacher-name-display" class="font-medium">Mr. Johnson</div>
+                                <div id="teacher-subject-display" class="text-xs opacity-90">Mathematics Teacher</div>
+                            </div>
+                            <button id="teacher-logout-btn" class="px-3 py-1 bg-white text-green-800 rounded-md text-sm font-medium hover:bg-gray-50">
+                                Logout
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Main Content -->
+            <main class="flex-1 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+                <!-- Upload Results Section -->
+                <section class="mb-8">
+                    <h2 class="text-xl font-bold text-gray-800 mb-4">Upload Student Results</h2>
+                    <div class="card bg-white">
+                        <form id="upload-results-form" class="p-6 space-y-4">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label for="term-select-teacher" class="block text-sm font-medium text-gray-700 mb-1">Term</label>
+                                    <select id="term-select-teacher" class="input-field block w-full px-3 py-2 rounded-md" required>
+                                        <option value="">Select Term</option>
+                                        <option value="first">First Term</option>
+                                        <option value="second">Second Term</option>
+                                        <option value="third">Third Term</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label for="class-select" class="block text-sm font-medium text-gray-700 mb-1">Class</label>
+                                    <select id="class-select" class="input-field block w-full px-3 py-2 rounded-md" required>
+                                        <option value="">Select Class</option>
+                                        <option>JS1A</option>
+                                        <option>JS1B</option>
+                                        <option>JS2A</option>
+                                        <option>JS2B</option>
+                                        <option>JS3A</option>
+                                        <option>JS3B</option>
+                                        <option>SS1A</option>
+                                        <option>SS1B</option>
+                                        <option>SS2A</option>
+                                        <option>SS2B</option>
+                                        <option>SS3A</option>
+                                        <option>SS3B</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label for="student-select" class="block text-sm font-medium text-gray-700 mb-1">Student</label>
+                                    <select id="student-select" class="input-field block w-full px-3 py-2 rounded-md" required>
+                                        <option value="">Select a student</option>
+                                        <!-- Students will be populated here -->
+                                    </select>
+                                </div>
+                                <div>
+                                    <label for="subject-select" class="block text-sm font-medium text-gray-700 mb-1">Subject</label>
+                                    <select id="subject-select" class="input-field block w-full px-3 py-2 rounded-md" required>
+                                        <option value="">Select a subject</option>
+                                        <option>Mathematics</option>
+                                        <option>English Language</option>
+                                        <option>Basic Science</option>
+                                        <option>Social Studies</option>
+                                        <option>Home Economics</option>
+                                        <option>Agricultural Science</option>
+                                        <option>Business Studies</option>
+                                        <option>Computer Studies</option>
+                                        <option>CRK/IRK</option>
+                                        <option>Physical Education</option>
+                                        <option>French</option>
+                                        <option>Fine Arts</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                <div>
+                                    <label for="ca-score" class="block text-sm font-medium text-gray-700 mb-1">CA Score (30%)</label>
+                                    <input type="number" id="ca-score" min="0" max="30" class="input-field block w-full px-3 py-2 rounded-md" placeholder="0-30" required>
+                                </div>
+                                <div>
+                                    <label for="exam-score" class="block text-sm font-medium text-gray-700 mb-1">Exam Score (70%)</label>
+                                    <input type="number" id="exam-score" min="0" max="70" class="input-field block w-full px-3 py-2 rounded-md" placeholder="0-70" required>
+                                </div>
+                                <div>
+                                    <label for="grade" class="block text-sm font-medium text-gray-700 mb-1">Grade</label>
+                                    <select id="grade" class="input-field block w-full px-3 py-2 rounded-md" required>
+                                        <option value="">Select grade</option>
+                                        <option value="A">A (75-100)</option>
+                                        <option value="B">B (65-74)</option>
+                                        <option value="C">C (55-64)</option>
+                                        <option value="D">D (45-54)</option>
+                                        <option value="E">E (40-44)</option>
+                                        <option value="F">F (0-39)</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div>
+                                <label for="remarks" class="block text-sm font-medium text-gray-700 mb-1">Remarks</label>
+                                <textarea id="remarks" rows="2" class="input-field block w-full px-3 py-2 rounded-md" placeholder="Enter performance remarks"></textarea>
+                            </div>
+
+                            <div class="pt-2 flex items-center">
+                                <button type="submit" id="submit-btn" class="btn-primary w-full py-2 px-4 rounded-md font-medium">
+                                    <i class="fas fa-upload mr-2"></i> Upload Results
+                                </button>
+                                <div id="loading-spinner" class="hidden ml-2 loading-spinner"></div>
+                            </div>
+                        </form>
+                    </div>
+                </section>
+
+                <!-- Recent Uploads Section -->
+                <section>
+                    <h2 class="text-xl font-bold text-gray-800 mb-4">Recently Uploaded Results</h2>
+                    <div class="card bg-white overflow-hidden">
+                        <div class="responsive-table">
+                            <table class="min-w-full divide-y divide-gray-200">
+                                <thead class="bg-gray-50">
+                                    <tr>
+                                        <th scope="col" class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Student</th>
+                                        <th scope="col" class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Class</th>
+                                        <th scope="col" class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Subject</th>
+                                        <th scope="col" class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">CA</th>
+                                        <th scope="col" class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Exam</th>
+                                        <th scope="col" class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Total</th>
+                                        <th scope="col" class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Grade</th>
+                                        <th scope="col" class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="bg-white divide-y divide-gray-200" id="recent-results-table">
+                                    <!-- Recent results will be inserted here -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <script>
+        // Enhanced Data Model
+        const data = {
+            students: [
+                { id: "GMSS/2023/001", name: "John Doe", password: "student123", class: "JS3A" },
+                { id: "GMSS/2023/002", name: "Jane Smith", password: "student123", class: "JS3B" },
+                { id: "GMSS/2023/003", name: "Michael Johnson", password: "student123", class: "SS1A" }
+            ],
+            
+            teachers: [
+                { id: "GMSS/STAFF/001", name: "Mr. Johnson", password: "teacher123", subject: "Mathematics" },
+                { id: "GMSS/STAFF/002", name: "Mrs. Williams", password: "teacher123", subject: "English Language" }
+            ],
+            
+            results: [
+                { 
+                    studentId: "GMSS/2023/001", 
+                    studentName: "John Doe", 
+                    class: "JS3A", 
+                    subject: "Mathematics", 
+                    caScore: 25, 
+                    examScore: 65, 
+                    total: 90, 
+                    grade: "A", 
+                    remarks: "Excellent performance", 
+                    date: "2023-11-15", 
+                    term: "first",
+                    formTeacherRemarks: "Excellent work, keep it up!",
+                    principalRemarks: "Promoted to next class"
+                },
+                { 
+                    studentId: "GMSS/2023/001", 
+                    studentName: "John Doe", 
+                    class: "JS3A", 
+                    subject: "English Language", 
+                    caScore: 22, 
+                    examScore: 58, 
+                    total: 80, 
+                    grade: "B", 
+                    remarks: "Good improvement in writing skills", 
+                    date: "2023-11-18", 
+                    term: "first",
+                    formTeacherRemarks: "Shows good potential",
+                    principalRemarks: "Keep working hard"
+                },
+                { 
+                    studentId: "GMSS/2023/001", 
+                    studentName: "John Doe", 
+                    class: "JS3A", 
+                    subject: "Mathematics", 
+                    caScore: 28, 
+                    examScore: 70, 
+                    total: 98, 
+                    grade: "A", 
+                    remarks: "Outstanding performance", 
+                    date: "2024-03-10", 
+                    term: "second",
+                    formTeacherRemarks: "Consistently excellent",
+                    principalRemarks: "Top of the class"
+                }
+            ],
+            
+            classes: ["JS1A", "JS1B", "JS2A", "JS2B", "JS3A", "JS3B", "SS1A", "SS1B", "SS2A", "SS2B", "SS3A", "SS3B"],
+            
+            subjects: [
+                "Mathematics", "English Language", "Basic Science", "Social Studies",
+                "Home Economics", "Agricultural Science", "Business Studies", 
+                "Computer Studies", "CRK/IRK", "Physical Education", "French", "Fine Arts"
+            ]
+        };
+
+        // Google Form Integration
+        const GOOGLE_FORM_URL = "https://docs.google.com/forms/d/e/YOUR_FORM_ID/formResponse";
+        const GOOGLE_SHEETS_URL = "https://docs.google.com/spreadsheets/d/YOUR_SHEET_ID/edit#gid=0";
+
+        // DOM Elements
+        const app = {
+            views: {
+                login: document.getElementById('login-view'),
+                student: document.getElementById('student-dashboard'),
+                teacher: document.getElementById('teacher-dashboard')
+            },
+            
+            buttons: {
+                studentLogin: document.getElementById('student-login-btn'),
+                teacherLogin: document.getElementById('teacher-login-btn'),
+                studentLogout: document.getElementById('student-logout-btn'),
+                teacherLogout: document.getElementById('teacher-logout-btn'),
+                submitBtn: document.getElementById('submit-btn')
+            },
+            
+            forms: {
+                studentLogin: document.getElementById('student-login-form'),
+                teacherLogin: document.getElementById('teacher-login-form'),
+                uploadResults: document.getElementById('upload-results-form')
+            },
+            
+            displays: {
+                studentName: document.getElementById('student-name-display'),
+                studentClass: document.getElementById('student-class-display'),
+                teacherName: document.getElementById('teacher-name-display'),
+                teacherSubject: document.getElementById('teacher-subject-display'),
+                
+                studentResults: document.getElementById('student-results-container'),
+                reportCard: document.getElementById('report-card-table'),
+                recentResults: document.getElementById('recent-results-table'),
+                
+                studentAverage: document.getElementById('student-average'),
+                studentPosition: document.getElementById('student-position'),
+                studentAttendance: document.getElementById('student-attendance'),
+                
+                formTeacherRemarks: document.getElementById('form-teacher-remarks'),
+                principalRemarks: document.getElementById('principal-remarks')
+            },
+            
+            selects: {
+                termTeacher: document.getElementById('term-select-teacher'),
+                class: document.getElementById('class-select'),
+                student: document.getElementById('student-select'),
+                subject: document.getElementById('subject-select'),
+                grade: document.getElementById('grade')
+            },
+            
+            inputs: {
+                studentId: document.getElementById('student-id'),
+                studentPassword: document.getElementById('student-password'),
+                teacherId: document.getElementById('teacher-id'),
+                teacherPassword: document.getElementById('teacher-password'),
+                caScore: document.getElementById('ca-score'),
+                examScore: document.getElementById('exam-score'),
+                remarks: document.getElementById('remarks')
+            },
+            
+            loading: {
+                spinner: document.getElementById('loading-spinner')
+            }
+        };
+
+        // State Management
+        let currentUser = null;
+        let currentTerm = 'first';
+
+        // Initialize the app
+        function init() {
+            setupEventListeners();
+            app.buttons.studentLogin.click();
+        }
+
+        // Set up all event listeners
+        function setupEventListeners() {
+            // Role selection
+            app.buttons.studentLogin.addEventListener('click', handleStudentLoginClick);
+            app.buttons.teacherLogin.addEventListener('click', handleTeacherLoginClick);
+            
+            // Form submissions
+            app.forms.studentLogin.addEventListener('submit', handleStudentLogin);
+            app.forms.teacherLogin.addEventListener('submit', handleTeacherLogin);
+            app.forms.uploadResults.addEventListener('submit', handleResultUpload);
+            
+            // Logout
+            app.buttons.studentLogout.addEventListener('click', handleStudentLogout);
+            app.buttons.teacherLogout.addEventListener('click', handleTeacherLogout);
+            
+            // Class selection change (for teacher)
+            app.selects.class.addEventListener('change', handleClassSelectionChange);
+            
+            // Score changes (auto-calculate grade)
+            app.inputs.caScore.addEventListener('change', calculateGrade);
+            app.inputs.examScore.addEventListener('change', calculateGrade);
+            
+            // Term filter (for student)
+            document.querySelectorAll('.term-btn').forEach(btn => {
+                btn.addEventListener('click', handleTermFilterClick);
+            });
+        }
+
+        // Handle term filter click
+        function handleTermFilterClick(e) {
+            // Update active term button
+            document.querySelectorAll('.term-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            e.target.classList.add('active');
+            
+            // Set current term and reload results
+            currentTerm = e.target.dataset.term;
+            loadStudentResults(currentUser.id, currentTerm);
+        }
+
+        // Handle student login button click
+        function handleStudentLoginClick() {
+            app.buttons.studentLogin.classList.remove('bg-gray-100', 'text-gray-700');
+            app.buttons.studentLogin.classList.add('bg-green-700', 'text-white');
+            
+            app.buttons.teacherLogin.classList.remove('bg-green-700', 'text-white');
+            app.buttons.teacherLogin.classList.add('bg-gray-100', 'text-gray-700');
+            
+            app.forms.studentLogin.classList.remove('hidden');
+            app.forms.teacherLogin.classList.add('hidden');
+        }
+
+        // Handle teacher login button click
+        function handleTeacherLoginClick() {
+            app.buttons.teacherLogin.classList.remove('bg-gray-100', 'text-gray-700');
+            app.buttons.teacherLogin.classList.add('bg-green-700', 'text-white');
+            
+            app.buttons.studentLogin.classList.remove('bg-green-700', 'text-white');
+            app.buttons.studentLogin.classList.add('bg-gray-100', 'text-gray-700');
+            
+            app.forms.teacherLogin.classList.remove('hidden');
+            app.forms.studentLogin.classList.add('hidden');
+            
+            populateStudentDropdown();
+        }
+
+        // Handle student login
+        function handleStudentLogin(e) {
+            e.preventDefault();
+            const studentId = `GMSS/${app.inputs.studentId.value}`;
+            const password = app.inputs.studentPassword.value;
+            
+            const student = data.students.find(s => 
+                s.id === studentId && s.password === password
+            );
+            
+            if (student) {
+                currentUser = student;
+                showView(app.views.student);
+                
+                app.displays.studentName.textContent = student.name;
+                app.displays.studentClass.textContent = student.class;
+                
+                loadStudentResults(student.id, currentTerm);
+            } else {
+                alert('Invalid admission number or password');
+            }
+        }
+
+        // Handle teacher login
+        function handleTeacherLogin(e) {
+            e.preventDefault();
+            const teacherId = `GMSS/STAFF/${app.inputs.teacherId.value}`;
+            const password = app.inputs.teacherPassword.value;
+            
+            const teacher = data.teachers.find(t => 
+                t.id === teacherId && t.password === password
+            );
+            
+            if (teacher) {
+                currentUser = teacher;
+                showView(app.views.teacher);
+                
+                app.displays.teacherName.textContent = teacher.name;
+                app.displays.teacherSubject.textContent = `${teacher.subject} Teacher`;
+                
+                loadRecentResults();
+            } else {
+                alert('Invalid staff ID or password');
+            }
+        }
+
+        // Handle student logout
+        function handleStudentLogout() {
+            currentUser = null;
+            showView(app.views.login);
+            app.forms.studentLogin.reset();
+        }
+
+        // Handle teacher logout
+        function handleTeacherLogout() {
+            currentUser = null;
+            showView(app.views.login);
+            app.forms.teacherLogin.reset();
+        }
+
+        // Handle class selection change (teacher)
+        function handleClassSelectionChange() {
+            populateStudentDropdown();
+        }
+
+        // Handle result upload
+        async function handleResultUpload(e) {
+            e.preventDefault();
+            
+            // Show loading state
+            app.buttons.submitBtn.disabled = true;
+            app.loading.spinner.classList.remove('hidden');
+            
+            const studentId = app.selects.student.value;
+            const student = data.students.find(s => s.id === studentId);
+            const term = app.selects.termTeacher.value;
+            const className = app.selects.class.value;
+            const subject = app.selects.subject.value;
+            const caScore = parseInt(app.inputs.caScore.value);
+            const examScore = parseInt(app.inputs.examScore.value);
+            const total = caScore + examScore;
+            const grade = app.selects.grade.value;
+            const remarks = app.inputs.remarks.value;
+            
+            // Create result object
+            const newResult = {
+                studentId,
+                studentName: student.name,
+                class: className,
+                subject,
+                caScore,
+                examScore,
+                total,
+                grade,
+                remarks,
+                date: new Date().toISOString().split('T')[0],
+                term,
+                formTeacherRemarks: "Pending review",
+                principalRemarks: "Pending review"
+            };
+            
+            try {
+                // Submit to Google Form (simulated)
+                const success = await submitToGoogleForm(newResult);
+                
+                if (success) {
+                    // Add to local data
+                    data.results.unshift(newResult);
+                    
+                    // Reset form
+                    app.forms.uploadResults.reset();
+                    
+                    // Reload recent results
+                    loadRecentResults();
+                    
+                    // Show success message
+                    alert(`Successfully uploaded ${student.name}'s ${subject} results!\n\nYou can view the complete record here: ${GOOGLE_SHEETS_URL}`);
+                } else {
+                    alert('Failed to submit to Google Drive. Please try again.');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('An error occurred. Please try again.');
+            } finally {
+                // Reset loading state
+                app.buttons.submitBtn.disabled = false;
+                app.loading.spinner.classList.add('hidden');
+            }
+        }
+
+        // Utility function to show a specific view
+        function showView(view) {
+            Object.values(app.views).forEach(v => v.classList.add('hidden'));
+            view.classList.remove('hidden');
+        }
+
+        // Populate student dropdown based on selected class
+        function populateStudentDropdown(classSelected = '') {
+            app.selects.student.innerHTML = '<option value="">Select a student</option>';
+            
+            const studentsInClass = classSelected 
+                ? data.students.filter(s => s.class === classSelected)
+                : data.students;
+            
+            studentsInClass.forEach(student => {
+                const option = document.createElement('option');
+                option.value = student.id;
+                option.textContent = `${student.name} (${student.id})`;
+                app.selects.student.appendChild(option);
+            });
+        }
+
+        // Load student results for a specific term
+        function loadStudentResults(studentId, term = 'first') {
+            const studentResults = data.results.filter(r => 
+                r.studentId === studentId && r.term === term
+            );
+            
+            app.displays.studentResults.innerHTML = '';
+            
+            if (studentResults.length === 0) {
+                app.displays.studentResults.innerHTML = `
+                    <div class="col-span-3 py-8 text-center text-gray-500">
+                        <i class="fas fa-book-open text-3xl mb-2 opacity-50"></i>
+                        <p>No results available for ${termToDisplayName(term)}.</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            // Get form teacher and principal remarks from any result (they should be the same for all)
+            const sampleResult = studentResults[0];
+            app.displays.formTeacherRemarks.textContent = sampleResult.formTeacherRemarks || "Not available";
+            app.displays.principalRemarks.textContent = sampleResult.principalRemarks || "Not available";
+            
+            studentResults.forEach(result => {
+                const card = document.createElement('div');
+                card.className = 'card bg-white p-4';
+                
+                card.innerHTML = `
+                    <div class="flex justify-between items-start mb-2">
+                        <div>
+                            <h3 class="font-bold text-gray-800">${result.subject}</h3>
+                            <p class="text-sm text-gray-500">${result.class}</p>
+                        </div>
+                        <div class="${getGradeColorClass(result.grade)} text-2xl">
+                            ${result.grade}
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-2 gap-3 mt-3">
+                        <div>
+                            <p class="text-xs text-gray-500">CA Score</p>
+                            <p class="font-medium">${result.caScore}/30</p>
+                        </div>
+                        <div>
+                            <p class="text-xs text-gray-500">Exam Score</p>
+                            <p class="font-medium">${result.examScore}/70</p>
+                        </div>
+                    </div>
+                    <div class="mt-3 pt-2 border-t border-gray-100">
+                        <p class="text-xs text-gray-500">Remarks</p>
+                        <p class="font-medium text-sm">${result.remarks}</p>
+                    </div>
+                    <div class="mt-2 text-right text-xs text-gray-400">
+                        ${formatDate(result.date)}
+                    </div>
+                `;
+                
+                app.displays.studentResults.appendChild(card);
+            });
+            
+            // Calculate average
+            const average = studentResults.reduce((sum, result) => sum + result.total, 0) / studentResults.length;
+            app.displays.studentAverage.textContent = average.toFixed(1) + '%';
+            
+            // Update position (simplified - in real app this would be calculated from all students)
+            const position = Math.max(1, Math.min(5, 6 - Math.floor(average / 20)));
+            const suffix = position === 1 ? 'st' : position === 2 ? 'nd' : position === 3 ? 'rd' : 'th';
+            app.displays.studentPosition.innerHTML = `${position}<sup>${suffix}</sup>`;
+            
+            // Load report card
+            loadReportCard(studentId, term);
+        }
+
+        // Load student report card
+        function loadReportCard(studentId, term) {
+            const studentResults = data.results.filter(r => 
+                r.studentId === studentId && r.term === term
+            );
+            
+            app.displays.reportCard.innerHTML = '';
+            
+            studentResults.forEach(result => {
+                const row = document.createElement('tr');
+                
+                row.innerHTML = `
+                    <td class="px-4 py-3 whitespace-nowrap text-sm font-medium text-gray-900">
+                        ${result.subject}
+                    </td>
+                    <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-500">
+                        ${result.caScore}
+                    </td>
+                    <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-500">
+                        ${result.examScore}
+                    </td>
+                    <td class="px-4 py-3 whitespace-nowrap text-sm font-medium text-gray-900">
+                        ${result.total}
+                    </td>
+                    <td class="px-4 py-3 whitespace-nowrap text-sm ${getGradeColorClass(result.grade)}">
+                        ${result.grade}
+                    </td>
+                    <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-500">
+                        ${result.remarks}
+                    </td>
+                `;
+                
+                app.displays.reportCard.appendChild(row);
+            });
+        }
+
+        // Load recent results (for teacher dashboard)
+        function loadRecentResults(limit = 5) {
+            // Filter by teacher's subject if possible
+            const teacherSubject = currentUser?.subject;
+            const recentResults = [...data.results]
+                .sort((a, b) => new Date(b.date) - new Date(a.date))
+                .filter(result => !teacherSubject || result.subject === teacherSubject)
+                .slice(0, limit);
+            
+            app.displays.recentResults.innerHTML = '';
+            
+            if (recentResults.length === 0) {
+                app.displays.recentResults.innerHTML = `
+                    <tr>
+                        <td colspan="8" class="px-4 py-4 text-center text-gray-500">
+                            No results uploaded yet
+                        </td>
+                    </tr>
+                `;
+                return;
+            }
+            
+            recentResults.forEach(result => {
+                const row = document.createElement('tr');
+                
+                row.innerHTML = `
+                    <td class="px-4 py-3 whitespace-nowrap">
+                        <div class="text-sm font-medium text-gray-900">${result.studentName}</div>
+                        <div class="text-sm text-gray-500">${result.studentId}</div>
+                    </td>
+                    <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-500">
+                        ${result.class}
+                    </td>
+                    <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-900">
+                        ${result.subject}
+                    </td>
+                    <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-500">
+                        ${result.caScore}
+                    </td>
+                    <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-500">
+                        ${result.examScore}
+                    </td>
+                    <td class="px-4 py-3 whitespace-nowrap text-sm font-medium text-gray-900">
+                        ${result.total}
+                    </td>
+                    <td class="px-4 py-3 whitespace-nowrap">
+                        <span class="px-2 py-1 text-xs font-semibold rounded-full ${getGradeColorClass(result.grade)}">
+                            ${result.grade}
+                        </span>
+                    </td>
+                    <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-500">
+                        ${formatDate(result.date)}
+                    </td>
+                `;
+                
+                app.displays.recentResults.appendChild(row);
+            });
+        }
+
+        // Auto-calculate grade when scores change
+        function calculateGrade() {
+            if (app.inputs.caScore.value && app.inputs.examScore.value) {
+                const total = parseInt(app.inputs.caScore.value) + parseInt(app.inputs.examScore.value);
+                if (total >= 75) app.selects.grade.value = "A";
+                else if (total >= 65) app.selects.grade.value = "B";
+                else if (total >= 55) app.selects.grade.value = "C";
+                else if (total >= 45) app.selects.grade.value = "D";
+                else if (total >= 40) app.selects.grade.value = "E";
+                else app.selects.grade.value = "F";
+            }
+        }
+
+        // Submit data to Google Form
+        async function submitToGoogleForm(result) {
+            // In a real implementation, you would:
+            // 1. Create a Google Form with all the fields you need
+            // 2. Get the form's submission URL
+            // 3. Find each field's entry ID (inspect the form's HTML to find these)
+            // 4. Submit the data to those fields
+            
+            // For this demo, we'll simulate a successful submission
+            console.log('Submitting to Google Form:', result);
+            
+            // Simulate network delay
+            await new Promise(resolve => setTimeout(resolve, 1000));
+            
+            // In a real app, you would do something like:
+            /*
+            const formData = new FormData();
+            formData.append('entry.123456789', result.studentId);
+            formData.append('entry.987654321', result.studentName);
+            // ... add all other fields
+            
+            try {
+                const response = await fetch(GOOGLE_FORM_URL, {
+                    method: 'POST',
+                    body: formData,
+                    mode: 'no-cors'
+                });
+                console.log('Form submitted successfully');
+                return true;
+            } catch (error) {
+                console.error('Error submitting form:', error);
+                return false;
+            }
+            */
+            
+            return true; // Simulate success
+        }
+
+        // Utility function to format date
+        function formatDate(dateString) {
+            const options = { year: 'numeric', month: 'short', day: 'numeric' };
+            return new Date(dateString).toLocaleDateString(undefined, options);
+        }
+
+        // Utility function to get grade color class
+        function getGradeColorClass(grade) {
+            return `grade-${grade}`;
+        }
+
+        // Convert term ID to display name
+        function termToDisplayName(termId) {
+            return {
+                'first': 'First Term',
+                'second': 'Second Term',
+                'third': 'Third Term'
+            }[termId] || termId;
+        }
+
+        // Initialize the application
+        init();
+    </script>
+</body>
+</html>
